@@ -15,13 +15,15 @@ public class BatController : MonoBehaviour {
     public Transform sprite;
     public Animator animator;
     private State state;
+    //--------------------------------------------------------------------------
 	// Use this for initialization
 	void Start () {
         transform = GetComponent<Transform>();        
         state = State.FLY;
-        animator.enabled = false;
+        animator.applyRootMotion = true;
 	}
 	
+    //--------------------------------------------------------------------------
 	// Update is called once per frame
 	void Update () {
         if (Game.getInstance().state != Game.State.PLAY )
@@ -35,12 +37,6 @@ public class BatController : MonoBehaviour {
 
         if ( state == State.FLY )
         {
-            if ( translation != Vector3.zero )
-            {
-                sprite.localEulerAngles = Vector3.forward * Vector3.Angle(Vector3.down, translation) *
-                                          ( translation.x > 0 ? 1 : -1 ) - Vector3.forward * 90;
-
-            }
 
             transform.Translate(translation);
 
@@ -62,16 +58,24 @@ public class BatController : MonoBehaviour {
                 Game.getInstance().state = Game.State.STOP;
                 StartCoroutine(straightAttack(speed * 5.0f, 5.0f* side));
             }
+            else if ( translation != Vector3.zero )
+            {
+                sprite.localEulerAngles = Vector3.forward * Vector3.Angle(Vector3.down, translation) *
+                                          ( translation.x > 0 ? 1 : -1 ) - Vector3.forward * 90;
+
+            }
         }
         else if ( state == State.ATTACH )
         {
             if (Input.GetButtonDown("Attach"))
             {
                 state = State.FLY;
+                animator.Play("Fly");
             }
         }
 	}
 
+    //--------------------------------------------------------------------------
     IEnumerator straightAttack ( float speed, float distance )
     {
         Vector3 targetPoint = transform.position;
@@ -97,6 +101,7 @@ public class BatController : MonoBehaviour {
         yield return null;
     }
 
+    //--------------------------------------------------------------------------
     IEnumerator swoopAttack ( float angle, float speed, float pivotOffset )
     {
         Vector3 pivotPoint = transform.position;
@@ -121,6 +126,7 @@ public class BatController : MonoBehaviour {
         yield return null;
     }
 
+    //--------------------------------------------------------------------------
     IEnumerator attach ( float speed, float distance )
     {
         bool onRebound = false;
@@ -129,7 +135,7 @@ public class BatController : MonoBehaviour {
         targetPoint += Vector3.up * distance;
         float targetDistance = 0;
 
-        animator.enabled = true;
+        animator.applyRootMotion = false;
         sprite.localEulerAngles = Vector3.forward;
         animator.Play("Attach", -1, 0);
         
@@ -145,7 +151,6 @@ public class BatController : MonoBehaviour {
                 transform.position = Vector3.MoveTowards(transform.position, startPoint, speed * Time.deltaTime);
             }
             targetDistance = Vector3.Distance(transform.position, targetPoint);
-            //sprite.Rotate(0, 0, Mathf.LerpAngle( sprite.eulerAngles.y, 180, speed * Time.deltaTime) );
             if (!Input.GetButton("Attach"))
             {
                 break;
@@ -166,18 +171,20 @@ public class BatController : MonoBehaviour {
 
             yield return null;
         }
-
-        animator.enabled = false;        
+        animator.applyRootMotion = true;
+        animator.Play("Fly");
         Game.getInstance().state = Game.State.PLAY;
         yield return null;
     }
 
+    //--------------------------------------------------------------------------
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Tree" && Input.GetButton("Attach") && Mathf.Abs(sprite.eulerAngles.z) > 180)
+        if (collision.tag == "Tree" && Input.GetButton("Attach") && 
+            sprite.eulerAngles.z > 160 )
         {
             StopAllCoroutines();
-            animator.enabled = false;
+            animator.applyRootMotion = true;
             Game.getInstance().state = Game.State.PLAY;
             state = State.ATTACH;
         }
