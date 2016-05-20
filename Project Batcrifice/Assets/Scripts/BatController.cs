@@ -3,42 +3,91 @@ using System.Collections;
 
 public class BatController : MonoBehaviour {
 
+    enum State
+    {
+        FLY,
+        ATTACH
+    }
+
     public float speed = 5.0f;
 
     new public Transform transform;
-
+    private State state;
 	// Use this for initialization
 	void Start () {
         transform = GetComponent<Transform>();
+        state = State.FLY;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (Game.getInstance().state != Game.State.PLAY)
+        if (Game.getInstance().state != Game.State.PLAY )
             return;
 
         Vector3 translation = new Vector3( Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0 );
         translation *= (speed * Time.deltaTime);
 
 
-        transform.Translate(translation);
-
-        if ( Input.GetButtonDown( "Jump" ) )
+        if ( state == State.FLY )
         {
-            if ( translation.x != 0 )//swoop attack
+
+            transform.Translate(translation);
+
+            if ( Input.GetButtonDown( "SwoopAttack" ) )
             {
-                int side = (int)(translation.x / Mathf.Abs( translation.x ));
+                if ( translation.x != 0 )//swoop attack
+                {
+                    int side = (int)(translation.x / Mathf.Abs( translation.x ));
+                    Game.getInstance().state = Game.State.STOP;
+                    StartCoroutine(swoopAttack(180.0f, speed * side, 2.0f));
+                }
+            }
+            else if (Input.GetButtonDown("Attach"))
+            {
                 Game.getInstance().state = Game.State.STOP;
-                StartCoroutine(swoopAttack(180.0f, speed * side, 2.0f));
+                StartCoroutine(attach(2.0f, speed / 2.0f));
+            }
+            else if (Input.GetButtonDown("StraightAttack"))
+            {
+                int side = (int)(translation.x / Mathf.Abs(translation.x));
+
+                Game.getInstance().state = Game.State.STOP;
+                StartCoroutine(straightAttack(speed * 5.0f, 5.0f* side));
             }
         }
-
-        if (Input.GetButtonDown("Attach"))
+        else if ( state == State.ATTACH )
         {
-            Game.getInstance().state = Game.State.STOP;
-            StartCoroutine(attach(2.0f));
+            if (Input.GetButtonDown("Attach"))
+            {
+                state = State.FLY;
+            }
         }
 	}
+
+    IEnumerator straightAttack ( float speed, float distance )
+    {
+        Vector3 targetPoint = transform.position;
+        targetPoint += Vector3.right * distance * ( speed > 0 ? 1 : -1 );
+        float targetDistance = 0;
+        while (true)
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPoint, speed * Time.deltaTime);
+            targetDistance = Vector3.Distance(transform.position, targetPoint);
+            if (!Input.GetButton("StraightAttack"))
+            {
+                break;
+            }
+            if (targetDistance < .1f)
+            {
+                break;
+            }
+
+            yield return null;
+        }
+
+        Game.getInstance().state = Game.State.PLAY;
+        yield return null;
+    }
 
     IEnumerator swoopAttack ( float angle, float speed, float pivotOffset )
     {
@@ -51,12 +100,10 @@ public class BatController : MonoBehaviour {
             transform.RotateAround(pivotPoint, Vector3.forward, speed);
             angle = (speed > 0 ? angle - speed : angle + speed);
 
-            if ( !Input.GetButton( "Jump" ) )
+            if (!Input.GetButton("SwoopAttack"))
             {
                 break;
             }
-
-            //pivotPoint.x += (speed > 0 ? 1 : -1) * .1f;
 
             yield return null;
         }
@@ -66,27 +113,56 @@ public class BatController : MonoBehaviour {
         yield return null;
     }
 
-    IEnumerator attach ( float distance )
+    IEnumerator attach ( float distance, float speed )
     {
+        bool onRebound = false;
         Vector3 targetPoint = transform.position;
         targetPoint += Vector3.up * distance;
-        while ( Vector3.Distance( transform.position, targetPoint ) > .1f )
+        float targetDistance = 0;
+        while (true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPoint, speed * Time.deltaTime);
+            if ( !onRebound )
+            {
+                transform.position = Vector3.Lerp(transform.position, targetPoint, speed * Time.deltaTime);
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPoint, speed * Time.deltaTime);
+            }
+            targetDistance = Vector3.Distance(transform.position, targetPoint);
             if (!Input.GetButton("Attach"))
             {
                 break;
             }
+            if (targetDistance < .1f)
+            {
+                if ( !onRebound )
+                {
+                    onRebound = true;
+                    targetPoint -= Vector3.up * distance;
+                    yield return new WaitForSeconds(0.5f);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
             yield return null;
         }
+
         Game.getInstance().state = Game.State.PLAY;
         yield return null;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        //co-routine
-        //if wall bounce off and damage
+        if (collision.tag == "Tree" && Input.GetButton("Attach"))
+        {
+            StopAllCoroutines();
+            Game.getInstance().state = Game.State.PLAY;
+            state = State.ATTACH;
+        }
     }
 
 }
