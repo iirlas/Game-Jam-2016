@@ -10,13 +10,16 @@ public class BatController : MonoBehaviour {
     }
 
     public float speed = 5.0f;
-
+    [HideInInspector]
     new public Transform transform;
+    public Transform sprite;
+    public Animator animator;
     private State state;
 	// Use this for initialization
 	void Start () {
-        transform = GetComponent<Transform>();
+        transform = GetComponent<Transform>();        
         state = State.FLY;
+        animator.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -24,30 +27,35 @@ public class BatController : MonoBehaviour {
         if (Game.getInstance().state != Game.State.PLAY )
             return;
 
+        //sprite.localEulerAngles = Vector3.forward * 90 * ;
+
         Vector3 translation = new Vector3( Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0 );
         translation *= (speed * Time.deltaTime);
 
 
         if ( state == State.FLY )
         {
+            if ( translation != Vector3.zero )
+            {
+                sprite.localEulerAngles = Vector3.forward * Vector3.Angle(Vector3.down, translation) *
+                                          ( translation.x > 0 ? 1 : -1 ) - Vector3.forward * 90;
+
+            }
 
             transform.Translate(translation);
 
-            if ( Input.GetButtonDown( "SwoopAttack" ) )
+            if (Input.GetButtonDown("SwoopAttack") && translation.x != 0 )
             {
-                if ( translation.x != 0 )//swoop attack
-                {
-                    int side = (int)(translation.x / Mathf.Abs( translation.x ));
-                    Game.getInstance().state = Game.State.STOP;
-                    StartCoroutine(swoopAttack(180.0f, speed * side, 2.0f));
-                }
+                int side = (int)(translation.x / Mathf.Abs( translation.x ));
+                Game.getInstance().state = Game.State.STOP;
+                StartCoroutine(swoopAttack(180.0f, speed * side, 2.0f));
             }
             else if (Input.GetButtonDown("Attach"))
             {
                 Game.getInstance().state = Game.State.STOP;
-                StartCoroutine(attach(2.0f, speed / 2.0f));
+                StartCoroutine(attach(speed / 2.0f, 1.0f));
             }
-            else if (Input.GetButtonDown("StraightAttack"))
+            else if (Input.GetButtonDown("StraightAttack") && translation.x != 0)
             {
                 int side = (int)(translation.x / Mathf.Abs(translation.x));
 
@@ -113,12 +121,19 @@ public class BatController : MonoBehaviour {
         yield return null;
     }
 
-    IEnumerator attach ( float distance, float speed )
+    IEnumerator attach ( float speed, float distance )
     {
         bool onRebound = false;
         Vector3 targetPoint = transform.position;
+        Vector3 startPoint = transform.position;
         targetPoint += Vector3.up * distance;
         float targetDistance = 0;
+
+        animator.enabled = true;
+        sprite.localEulerAngles = Vector3.forward;
+        animator.Play("Attach", -1, 0);
+        
+
         while (true)
         {
             if ( !onRebound )
@@ -127,9 +142,10 @@ public class BatController : MonoBehaviour {
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetPoint, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, startPoint, speed * Time.deltaTime);
             }
             targetDistance = Vector3.Distance(transform.position, targetPoint);
+            //sprite.Rotate(0, 0, Mathf.LerpAngle( sprite.eulerAngles.y, 180, speed * Time.deltaTime) );
             if (!Input.GetButton("Attach"))
             {
                 break;
@@ -138,9 +154,9 @@ public class BatController : MonoBehaviour {
             {
                 if ( !onRebound )
                 {
-                    onRebound = true;
-                    targetPoint -= Vector3.up * distance;
                     yield return new WaitForSeconds(0.5f);
+                    onRebound = true;
+                    animator.Play("Unattach", -1, 0);
                 }
                 else
                 {
@@ -151,15 +167,17 @@ public class BatController : MonoBehaviour {
             yield return null;
         }
 
+        animator.enabled = false;        
         Game.getInstance().state = Game.State.PLAY;
         yield return null;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Tree" && Input.GetButton("Attach"))
+        if (collision.tag == "Tree" && Input.GetButton("Attach") && Mathf.Abs(sprite.eulerAngles.z) > 180)
         {
             StopAllCoroutines();
+            animator.enabled = false;
             Game.getInstance().state = Game.State.PLAY;
             state = State.ATTACH;
         }
