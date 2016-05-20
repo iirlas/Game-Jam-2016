@@ -88,9 +88,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0.00840205, y: -0.037809014}
+  m_Offset: {x: 0.11551875, y: -0.24555051}
   serializedVersion: 2
-  m_Size: {x: 0.9057716, y: 1.0486059}
+  m_Size: {x: 1.120005, y: 1.1654611}
 --- !u!95 &9565704
 Animator:
   serializedVersion: 3
@@ -149,7 +149,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 984969293
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 274dd049afb21714087def0eaa361131, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d5c6f9c8609b64b4ba6e346fb0aabb2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -171,7 +171,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 274dd049afb21714087def0eaa361131,
+      objectReference: {fileID: 21300000, guid: d5c6f9c8609b64b4ba6e346fb0aabb2a,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
