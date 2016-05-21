@@ -6,7 +6,8 @@ public class BatController : MonoBehaviour {
     enum State
     {
         FLY,
-        ATTACH
+        ATTACH,
+        ATTACK
     }
 
     public float speed = 5.0f;
@@ -53,10 +54,11 @@ public class BatController : MonoBehaviour {
             }
             else if (Input.GetButtonDown("StraightAttack") && translation.x != 0)
             {
+                state = State.ATTACK;
                 int side = (int)(translation.x / Mathf.Abs(translation.x));
 
                 Game.getInstance().state = Game.State.STOP;
-                StartCoroutine(straightAttack(speed * 5.0f, 5.0f* side));
+                StartCoroutine(straightAttack(speed , 5.0f * side));
             }
             else if ( translation != Vector3.zero )
             {
@@ -93,10 +95,9 @@ public class BatController : MonoBehaviour {
             {
                 break;
             }
-
             yield return null;
         }
-
+        state = State.FLY;
         Game.getInstance().state = Game.State.PLAY;
         yield return null;
     }
@@ -177,16 +178,45 @@ public class BatController : MonoBehaviour {
         yield return null;
     }
 
+    IEnumerator grab ( GameObject item, Transform collision, Vector3 offset )
+    {
+
+        while (Input.GetButton("SwoopAttack"))
+        {
+            item.transform.position = transform.position - (collision.transform.localPosition + offset);
+            yield return null;
+        }
+        yield return null;
+    }
+
     //--------------------------------------------------------------------------
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Tree" && Input.GetButton("Attach") && 
-            sprite.eulerAngles.z > 160 )
+            sprite.eulerAngles.z > 160)
         {
             StopAllCoroutines();
             animator.applyRootMotion = true;
             Game.getInstance().state = Game.State.PLAY;
             state = State.ATTACH;
+        }
+        else if ( collision.tag == "NPC" && state == State.ATTACK)
+        {
+            StopAllCoroutines();
+            collision.transform.localScale = Vector3.one;
+            collision.gameObject.GetComponent<Animator>().SetBool("Attacked", true);
+            collision.gameObject.GetComponent<NPCController>().incapacitated = true;
+            collision.gameObject.AddComponent<Rigidbody2D>().gravityScale = 1f;
+            Game.getInstance().state = Game.State.PLAY;
+            state = State.FLY;
+        }
+        else if ( collision.tag == "Grabbable" )
+        {
+            StopAllCoroutines();
+            transform.eulerAngles = Vector3.zero;
+            StartCoroutine(grab(collision.transform.parent.gameObject, collision.transform, Vector3.up));
+            Game.getInstance().state = Game.State.PLAY;
+            state = State.FLY;
         }
     }
 
