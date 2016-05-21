@@ -12,6 +12,7 @@ public class Game : MonoBehaviour {
     public State state;
     private static Game instance = null;
 
+    public int count = 0;
     public float health = 100.0f;
     public float hunger = 100.0f;
     public float dayTimeScale = 5.0f;
@@ -64,11 +65,23 @@ public class Game : MonoBehaviour {
             health -= 1.00f * Time.deltaTime;
         }
 
-        if ( ( hunger <= 0 || health <= 0 ) && SceneManager.GetActiveScene().buildIndex < 3 )
+        if ( SceneManager.GetActiveScene().buildIndex < 3 )
         {
-            SceneManager.LoadScene( 3 );
-            hunger = 100;
-            health = 100;
+            if (hunger <= 0 || health <= 0)
+            {
+                SceneManager.LoadScene(3);
+                hunger = 100;
+                health = 100;
+                count = 0;
+            }
+            else if (count >= 10) 
+            {
+                SceneManager.LoadScene( 4 );
+                hunger = 100;
+                health = 100;
+                count = 0;
+            }
+
         }
 	}
 }

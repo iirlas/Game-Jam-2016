@@ -3,6 +3,7 @@ using System.Collections;
 
 public class NPCController : MonoBehaviour {
 
+    public AudioClip[] monsterClips;
     public bool incapacitated = false;
     [HideInInspector]
     new public Transform transform;
@@ -79,6 +80,8 @@ public class NPCController : MonoBehaviour {
         {
             Destroy(gameObject);
             Game.getInstance().hunger += 20.0f;
+            Game.getInstance().audioSource.PlayOneShot(monsterClips[Random.Range(0, monsterClips.Length)], 1.0f);
+            Game.getInstance().count++;
             //add to hunger;
         }
     }

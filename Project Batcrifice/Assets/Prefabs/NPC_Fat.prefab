@@ -131,6 +131,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369ddbb95ade1894aa13e537c4bb2e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterClips:
+  - {fileID: 8300000, guid: f9919a02f6ffbef4793a95f3afa939e2, type: 3}
+  - {fileID: 8300000, guid: aec530a2aa4face40934e30dc5980697, type: 3}
+  - {fileID: 8300000, guid: 35f637dc2b0cb724083690f87db9d764, type: 3}
+  - {fileID: 8300000, guid: 309afa2119c9cd24ba9e060a26cbf3e9, type: 3}
+  - {fileID: 8300000, guid: 5b2f55aeba2da144fb5aa91ce2f9f885, type: 3}
   incapacitated: 0
   transform: {fileID: 0}
   grabTransform: {fileID: 456740}
@@ -171,7 +177,31 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: monsterClips.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: monsterClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f9919a02f6ffbef4793a95f3afa939e2, type: 3}
+    - target: {fileID: 0}
+      propertyPath: monsterClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: aec530a2aa4face40934e30dc5980697, type: 3}
+    - target: {fileID: 0}
+      propertyPath: monsterClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 35f637dc2b0cb724083690f87db9d764, type: 3}
+    - target: {fileID: 0}
+      propertyPath: monsterClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 309afa2119c9cd24ba9e060a26cbf3e9, type: 3}
+    - target: {fileID: 0}
+      propertyPath: monsterClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b2f55aeba2da144fb5aa91ce2f9f885, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 165748}
