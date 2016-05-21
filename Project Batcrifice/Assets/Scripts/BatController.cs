@@ -287,6 +287,8 @@ public class BatController : MonoBehaviour {
                     break;
             }
 
+            Destroy(collision.gameObject);
+
         }
     }
 
