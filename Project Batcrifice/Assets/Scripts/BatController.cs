@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BatController : MonoBehaviour {
 
-    enum State
+    public enum State
     {
         FLY,
         ATTACH,
@@ -18,6 +18,12 @@ public class BatController : MonoBehaviour {
     private State state;
     private int side;
     private bool isGrabbing = false;
+
+    public State GetState()
+    {
+        return state;
+    }
+
     //--------------------------------------------------------------------------
 	// Use this for initialization
 	void Start () {

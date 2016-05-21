@@ -25,8 +25,15 @@ public class BirdController : MonoBehaviour {
     {
         if ( collision.transform.tag == "Player" )
         {
-            Game.getInstance().health -= 50;
-            collision.transform.Translate(Vector3.down);
+            if (collision.gameObject.GetComponent<BatController>().GetState() == BatController.State.ATTACK)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Game.getInstance().health -= 50;
+                collision.transform.Translate(Vector3.down);
+            }
         }
     }
 }
