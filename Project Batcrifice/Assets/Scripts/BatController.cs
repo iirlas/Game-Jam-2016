@@ -232,7 +232,7 @@ public class BatController : MonoBehaviour {
 
         if (collision.tag == "PowerUp")
         {
-            int powerUp = Random.Range(1, 5);
+            int powerUp = Random.Range(0, 5) + 1;
  
             switch (powerUp)
             {
