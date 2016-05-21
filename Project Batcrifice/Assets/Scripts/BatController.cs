@@ -10,7 +10,7 @@ public class BatController : MonoBehaviour {
         ATTACK
     }
 
-    public float speed = 5.0f;
+    public static float speed = 5.0f;
     [HideInInspector]
     new public Transform transform;
     public Transform sprite;
@@ -221,6 +221,66 @@ public class BatController : MonoBehaviour {
             animator.applyRootMotion = true;
             Game.getInstance().state = Game.State.PLAY;
             state = State.ATTACH;
+        }
+
+
+        if (collision.tag == "PowerUp")
+        {
+            int powerUp = Random.Range(1, 5);
+ 
+            switch (powerUp)
+            {
+                case 1: //health up
+                    if (Game.getInstance().health == 100)
+                    {
+                    }
+                    else
+                    {
+                        if (Game.getInstance().health < 81)
+                        {
+                            float newHealth = Game.getInstance().health + 20;
+                            Game.getInstance().health = newHealth;
+                        }
+                        else
+                        {
+                            Game.getInstance().health = 100;
+                        }
+
+                        print("HEALTH");
+                    }
+
+                    break;
+                case 2: //night up
+                    Game.getInstance().dayTimer.reset();
+                    print("TIMER");
+                    break;
+                case 3: //hunger up
+                    if (Game.getInstance().hunger == 100)
+                    {
+                    }
+                    else
+                    {
+                        if (Game.getInstance().hunger < 81)
+                        {
+                            float newHunger = Game.getInstance().hunger + 20;
+                            Game.getInstance().hunger = newHunger;
+                        }
+                        else
+                        {
+                            Game.getInstance().hunger = 100;
+                        }
+                    }
+                    print("HUNGER");
+                    break;
+                case 4:  //speed up
+                    BatController.speed += (BatController.speed * 0.50f);
+                    print("SPEED");
+                    break;
+                case 5:  //SWARM
+                    print("HI SCOTT");
+                    break;
+            }
+
         }
     }
 

@@ -11,7 +11,7 @@ public class GoToCredits : MonoBehaviour {
 
     void goToScene()
     {
-        StartCoroutine(LoadAfterDelay(01));
+        StartCoroutine(LoadAfterDelay(03));
     }
 
     IEnumerator LoadAfterDelay(float waitTime)

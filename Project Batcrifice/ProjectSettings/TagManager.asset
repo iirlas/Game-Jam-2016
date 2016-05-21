@@ -9,6 +9,7 @@ TagManager:
   - Grabbable
   - Floor
   - Portal
+  - PowerUp
   layers:
   - Default
   - TransparentFX

@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\GoToCredits.cs" />
      <Compile Include="Assets\Scripts\Menu.cs" />
      <Compile Include="Assets\Scripts\NPCController.cs" />
+     <Compile Include="Assets\Scripts\PowerPicker.cs" />
      <Compile Include="Assets\Scripts\TimeCycle.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\UIController.cs" />

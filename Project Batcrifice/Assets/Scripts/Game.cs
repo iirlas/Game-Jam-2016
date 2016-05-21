@@ -17,7 +17,7 @@ public class Game : MonoBehaviour {
     public float dayTimeScale = 5.0f;
     public float nightTimeScale = 100.0f;
     public bool isDayTime = false;
-    private Timer dayTimer = new Timer();
+    public Timer dayTimer = new Timer();
 
     public static Game getInstance()
     {
