@@ -61,9 +61,11 @@ public class Game : MonoBehaviour {
             health -= 1.00f * Time.deltaTime;
         }
 
-        if ( ( hunger <= 0 || health <= 0 ) && SceneManager.GetActiveScene().buildIndex != 3 )
+        if ( ( hunger <= 0 || health <= 0 ) && SceneManager.GetActiveScene().buildIndex < 3 )
         {
             SceneManager.LoadScene( 3 );
+            hunger = 100;
+            health = 100;
         }
 	}
 }

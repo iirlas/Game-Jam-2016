@@ -48,12 +48,14 @@
      <Compile Include="Assets\Scripts\BatController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Game.cs" />
+     <Compile Include="Assets\Scripts\GoToCredits.cs" />
+     <Compile Include="Assets\Scripts\Menu.cs" />
      <Compile Include="Assets\Scripts\NPCController.cs" />
      <Compile Include="Assets\Scripts\TimeCycle.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\UIController.cs" />
-     <None Include="Assets\Sounds\placeholder.txt" />
      <None Include="Assets\Scripts\placeholder.txt" />
+     <None Include="Assets\Sounds\placeholder.txt" />
      <None Include="Assets\Art\placeholder.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Users/Patricia/SkyDrive/PROGRAMS/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
