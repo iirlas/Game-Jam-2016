@@ -17,6 +17,7 @@ public class BatController : MonoBehaviour {
     public Animator animator;
     private State state;
     private int side;
+    private bool isGrabbing = false;
     //--------------------------------------------------------------------------
 	// Use this for initialization
 	void Start () {
@@ -54,6 +55,7 @@ public class BatController : MonoBehaviour {
             if (Input.GetButtonDown("SwoopAttack") )
             {
                 Game.getInstance().state = Game.State.STOP;
+                Game.getInstance().hunger -= 10;
                 StartCoroutine(swoopAttack(180.0f, speed * side, 2.0f));
             }
             else if (Input.GetButtonDown("Attach"))
@@ -64,18 +66,18 @@ public class BatController : MonoBehaviour {
             else if (Input.GetButtonDown("StraightAttack") )
             {
                 state = State.ATTACK;
-
+                Game.getInstance().hunger -= 20;
                 Game.getInstance().state = Game.State.STOP;
                 StartCoroutine(straightAttack(speed , 5.0f * side));
             }
             else if ( translation != Vector3.zero )
             {
                 sprite.localEulerAngles = Vector3.forward * Vector3.Angle(Vector3.down, translation) - Vector3.forward * 90;
-
             }
         }
         else if ( state == State.ATTACH )
         {
+            Game.getInstance().health += 1.00f * Time.deltaTime;
             if (Input.GetButtonDown("Attach"))
             {
                 state = State.FLY;
@@ -190,7 +192,7 @@ public class BatController : MonoBehaviour {
     {
         item.GetComponentInParent<Animator>().SetBool("Grabbed", true);
         animator.speed = 4;
-        while (Input.GetButton("SwoopAttack"))
+        while (Input.GetButton("SwoopAttack") && item && collision)
         {
             if (transform.position.y < item.transform.position.y + collision.localPosition.y) 
             {
@@ -199,9 +201,13 @@ public class BatController : MonoBehaviour {
             item.transform.position = transform.position - (collision.localPosition + offset);
             yield return null;
         }
+        isGrabbing = false;
         animator.speed = 1;
-        item.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        item.GetComponentInParent<Animator>().SetBool("Grabbed", false);
+        if ( item )
+        { 
+            item.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            item.GetComponentInParent<Animator>().SetBool("Grabbed", false);
+        }
         yield return null;
     }
 
@@ -234,9 +240,10 @@ public class BatController : MonoBehaviour {
             Game.getInstance().state = Game.State.PLAY;
             state = State.FLY;
         }
-        else if ( collision.tag == "Grabbable" &&
+        else if ( collision.tag == "Grabbable" && !isGrabbing &&
                   collision.gameObject.GetComponentInParent<Animator>().GetBool("Attacked") )
         {
+            isGrabbing = true;
             StopAllCoroutines();
             transform.eulerAngles = Vector3.zero;
             StartCoroutine(grab(collision.transform.parent.gameObject, collision.transform, Vector3.up));

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Game : MonoBehaviour {
@@ -13,8 +14,9 @@ public class Game : MonoBehaviour {
 
     public float health = 100.0f;
     public float hunger = 100.0f;
-    public float timeScale = 5.0f;
-    public bool isDayTime = true;
+    public float dayTimeScale = 5.0f;
+    public float nightTimeScale = 100.0f;
+    public bool isDayTime = false;
     private Timer dayTimer = new Timer();
 
     public static Game getInstance()
@@ -45,10 +47,23 @@ public class Game : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if ( dayTimer.elapsedTime() > timeScale )
+        if ( (isDayTime && dayTimer.elapsedTime() > dayTimeScale) ||
+            (!isDayTime && dayTimer.elapsedTime() > nightTimeScale))
         {
             dayTimer.reset();
             isDayTime = !isDayTime;
+        }
+
+        //hunger -= 1.00f * Time.deltaTime;
+
+        if ( isDayTime )
+        {
+            health -= 1.00f * Time.deltaTime;
+        }
+
+        if ( ( hunger <= 0 || health <= 0 ) && SceneManager.GetActiveScene().buildIndex != 3 )
+        {
+            SceneManager.LoadScene( 3 );
         }
 	}
 }

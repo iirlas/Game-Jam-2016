@@ -29,7 +29,7 @@ public class NPCController : MonoBehaviour {
 
         if (!incapacitated)
         {
-            if (timer.elapsedTime() > Random.Range(10.0f, 60.0f))
+            if (timer.elapsedTime() > Random.Range(1.0f, 6.0f) * 10.0f)
             {
                 direction = (direction == Vector3.right ? Vector3.left : Vector3.right);
                 transform.localScale = direction + Vector3.up + Vector3.forward;
@@ -77,20 +77,14 @@ public class NPCController : MonoBehaviour {
     {
         if ( collision.tag == "Portal" )
         {
-            sprite.enabled = false;
+            Destroy(gameObject);
+            Game.getInstance().hunger += 20.0f;
             //add to hunger;
         }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        //AnimatorStateInfo animState = animator.GetCurrentAnimatorStateInfo(0);
-
-        //if (collision.transform.tag == "Floor" && animState.IsTag("UP"))
-        //{
-        //    animator.SetBool("Up", false);
-        //    animator.applyRootMotion = true;
-        //}
     }
 
     public void LateUpdate()
