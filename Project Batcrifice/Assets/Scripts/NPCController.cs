@@ -21,7 +21,6 @@ public class NPCController : MonoBehaviour {
         timer.start();
         direction = Vector3.left;
         transform.localScale = direction + Vector3.up + Vector3.forward;
-
 	}
 	
 	// Update is called once per frame
@@ -61,4 +60,15 @@ public class NPCController : MonoBehaviour {
             }
         }
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if ( collision.tag == "Portal" )
+        {
+            sprite.enabled = false;
+            //add to hunger;
+        }
+    }
+
+    
 }

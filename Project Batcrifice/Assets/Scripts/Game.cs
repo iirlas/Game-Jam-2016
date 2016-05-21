@@ -11,6 +11,8 @@ public class Game : MonoBehaviour {
     public State state;
     private static Game instance = null;
 
+    public float health = 100.0f;
+    public float hunger = 100.0f;
     public float timeScale = 5.0f;
     public bool isDayTime = true;
     private Timer dayTimer = new Timer();

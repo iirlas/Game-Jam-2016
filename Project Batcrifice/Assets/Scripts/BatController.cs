@@ -211,7 +211,8 @@ public class BatController : MonoBehaviour {
 
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if ( collision.tag == "NPC" && state == State.ATTACK)
+        if ( collision.tag == "NPC" && state == State.ATTACK &&
+             collision.gameObject.GetComponent<Animator>().GetBool("Attacked") == false)
         {
             StopAllCoroutines();
             collision.transform.localScale = Vector3.one;
