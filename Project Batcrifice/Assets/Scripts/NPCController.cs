@@ -9,7 +9,7 @@ public class NPCController : MonoBehaviour {
     public Transform grabTransform;
     private SpriteRenderer sprite;
     private Animator animator;
-    private BoxCollider2D boxcollider2d;
+    public BoxCollider2D[] boxColliders2d;
     private Timer timer = new Timer();
     private Vector3 direction;
 	// Use this for initialization
@@ -17,7 +17,7 @@ public class NPCController : MonoBehaviour {
         transform = GetComponent<Transform>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        boxcollider2d = GetComponent<BoxCollider2D>();
+        boxColliders2d = GetComponents<BoxCollider2D>();
         timer.start();
         direction = Vector3.left;
         transform.localScale = direction + Vector3.up + Vector3.forward;
@@ -44,12 +44,24 @@ public class NPCController : MonoBehaviour {
         else
         {
             AnimatorStateInfo animState = animator.GetCurrentAnimatorStateInfo(0);
-            if (grabTransform.position.y > boxcollider2d.bounds.size.y && !animState.IsTag("UP"))
+            //float yCenter = grabTransform.position.y + boxColliders2d[1].offset.y;
+            //if (yCenter > boxColliders2d[0].bounds.size.y && !animState.IsTag("UP"))
+            //{
+            //    animator.SetBool("Up", true);
+            //    animator.applyRootMotion = true;
+            //}
+            //else if (yCenter < boxColliders2d[0].bounds.size.y && animState.IsTag("UP"))
+            //{
+            //    animator.SetBool("Up", false);
+            //    animator.applyRootMotion = true;
+            //}
+
+            if (animator.GetBool("Grabbed") && !animState.IsTag("UP"))
             {
                 animator.SetBool("Up", true);
                 animator.applyRootMotion = true;
             }
-            else if (grabTransform.position.y < boxcollider2d.bounds.size.y && animState.IsTag("UP"))
+            else if (!animator.GetBool("Grabbed") && animState.IsTag("UP"))
             {
                 animator.SetBool("Up", false);
                 animator.applyRootMotion = true;
@@ -70,5 +82,24 @@ public class NPCController : MonoBehaviour {
         }
     }
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        //AnimatorStateInfo animState = animator.GetCurrentAnimatorStateInfo(0);
+
+        //if (collision.transform.tag == "Floor" && animState.IsTag("UP"))
+        //{
+        //    animator.SetBool("Up", false);
+        //    animator.applyRootMotion = true;
+        //}
+    }
+
+    public void LateUpdate()
+    {
+        if ( transform.position.y + boxColliders2d[1].offset.y < 0 )
+        {
+            transform.position = new Vector3(transform.position.x, Mathf.Abs(boxColliders2d[1].offset.y), 0);
+        }
+    }
     
+
 }

@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
         transform.position = (Vector3)((Vector2)target.position) + Vector3.forward * transform.position.z;
 	}
 }

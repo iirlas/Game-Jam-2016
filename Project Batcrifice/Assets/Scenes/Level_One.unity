@@ -221,7 +221,7 @@ Transform:
   m_LocalScale: {x: 9.810558, y: 1.9090099, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1 &297919287
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,12 +866,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 785496319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.23, y: 4.08, z: 0}
+  m_LocalPosition: {x: -1.23, y: 3.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 56501583}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 7
 --- !u!114 &785496323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -886,6 +886,7 @@ MonoBehaviour:
   incapacitated: 0
   transform: {fileID: 0}
   grabTransform: {fileID: 56501583}
+  boxColliders2d: []
 --- !u!61 &785496324
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -911,7 +912,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -3.6618958}
+  m_Offset: {x: 0, y: -3.23}
   serializedVersion: 2
   m_Size: {x: 3.8700001, y: 0.13602066}
 --- !u!1 &858359951
@@ -1220,9 +1221,12 @@ GameObject:
   - 4: {fileID: 1354786936}
   - 212: {fileID: 1354786935}
   - 95: {fileID: 1354786934}
+  - 114: {fileID: 1354786939}
+  - 61: {fileID: 1354786937}
+  - 61: {fileID: 1354786938}
   m_Layer: 0
   m_Name: NPC_bro
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1239,7 +1243,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 10568e26a116c5a44a4613321df59cb8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1281,12 +1285,55 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1354786933}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.75, y: 4.78, z: 0}
+  m_LocalPosition: {x: -6.75, y: 3.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1801931762}
   m_Father: {fileID: 0}
   m_RootOrder: 9
+--- !u!61 &1354786937
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1354786933}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 2.49, y: 8.26}
+--- !u!61 &1354786938
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1354786933}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: -4.02}
+  serializedVersion: 2
+  m_Size: {x: 3.8700001, y: 0.13602066}
+--- !u!114 &1354786939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1354786933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 369ddbb95ade1894aa13e537c4bb2e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  incapacitated: 0
+  transform: {fileID: 0}
+  grabTransform: {fileID: 1801931762}
+  boxColliders2d: []
 --- !u!1 &1437376329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,9 +1377,12 @@ GameObject:
   - 4: {fileID: 1486763917}
   - 212: {fileID: 1486763916}
   - 95: {fileID: 1486763915}
+  - 114: {fileID: 1486763920}
+  - 61: {fileID: 1486763918}
+  - 61: {fileID: 1486763919}
   m_Layer: 0
   m_Name: NPC_hippie
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1349,7 +1399,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8ded0c5e3dfdf7642800f238462ea34e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1391,12 +1441,55 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1486763914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.98, y: 4.98, z: 0}
+  m_LocalPosition: {x: -4.98, y: 3.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 368890821}
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!61 &1486763918
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1486763914}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 4.9, y: 8.06}
+--- !u!61 &1486763919
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1486763914}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: -3.9}
+  serializedVersion: 2
+  m_Size: {x: 3.8700001, y: 0.13602066}
+--- !u!114 &1486763920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1486763914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 369ddbb95ade1894aa13e537c4bb2e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  incapacitated: 0
+  transform: {fileID: 0}
+  grabTransform: {fileID: 368890821}
+  boxColliders2d: []
 --- !u!1001 &1509351497
 Prefab:
   m_ObjectHideFlags: 0
@@ -1564,7 +1657,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &1743776667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,7 +1719,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2003,7 +2096,7 @@ GameObject:
   - 61: {fileID: 2107975279}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2066,4 +2159,4 @@ Transform:
   m_LocalScale: {x: 680.3086, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6

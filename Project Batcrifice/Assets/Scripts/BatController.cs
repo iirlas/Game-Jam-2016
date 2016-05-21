@@ -185,14 +185,17 @@ public class BatController : MonoBehaviour {
         yield return null;
     }
 
-    IEnumerator grab ( GameObject item, Transform collision, Vector3 offset )
+    //--------------------------------------------------------------------------
+    IEnumerator grab(GameObject item, Transform collision, Vector3 offset)
     {
-
+        item.GetComponentInParent<Animator>().SetBool("Grabbed", true);
         while (Input.GetButton("SwoopAttack"))
         {
             item.transform.position = transform.position - (collision.transform.localPosition + offset);
             yield return null;
         }
+        item.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        item.GetComponentInParent<Animator>().SetBool("Grabbed", false);
         yield return null;
     }
 
@@ -212,17 +215,20 @@ public class BatController : MonoBehaviour {
     public void OnTriggerStay2D(Collider2D collision)
     {
         if ( collision.tag == "NPC" && state == State.ATTACK &&
-             collision.gameObject.GetComponent<Animator>().GetBool("Attacked") == false)
+             collision.gameObject.GetComponent<Animator>().GetBool("Attacked") == false )
         {
             StopAllCoroutines();
             collision.transform.localScale = Vector3.one;
             collision.gameObject.GetComponent<Animator>().SetBool("Attacked", true);
             collision.gameObject.GetComponent<NPCController>().incapacitated = true;
-            collision.gameObject.AddComponent<Rigidbody2D>().gravityScale = 1f;
+            Rigidbody2D r = collision.gameObject.AddComponent<Rigidbody2D>();
+            r.gravityScale = 1f;
+            r.constraints = RigidbodyConstraints2D.FreezeRotation;
             Game.getInstance().state = Game.State.PLAY;
             state = State.FLY;
         }
-        else if ( collision.tag == "Grabbable" )
+        else if ( collision.tag == "Grabbable" &&
+                  collision.gameObject.GetComponentInParent<Animator>().GetBool("Attacked") == true )
         {
             StopAllCoroutines();
             transform.eulerAngles = Vector3.zero;
