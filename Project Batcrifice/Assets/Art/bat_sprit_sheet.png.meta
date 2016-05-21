@@ -1,0 +1,261 @@
+fileFormatVersion: 2
+guid: d5c6f9c8609b64b4ba6e346fb0aabb2a
+timeCreated: 1463764731
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: bat_sprit_sheet_0
+    21300002: bat_sprit_sheet_1
+    21300004: bat_sprit_sheet_2
+    21300006: bat_sprit_sheet_3
+    21300008: bat_sprit_sheet_4
+    21300010: bat_sprit_sheet_5
+    21300012: bat_sprit_sheet_6
+    21300014: bat_sprit_sheet_7
+    21300016: bat_sprit_sheet_8
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: bat_sprit_sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 185
+        width: 99
+        height: 112
+      alignment: 9
+      pivot: {x: 0.6161036, y: 0.27550274}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -60.994255, y: 81.14369}
+        - {x: -60.994255, y: 9.143692}
+        - {x: -44.994255, y: -30.856308}
+        - {x: -1.9942551, y: -30.856308}
+        - {x: 19.005745, y: -16.856308}
+        - {x: 38.005745, y: 11.143692}
+        - {x: 38.005745, y: 62.143692}
+        - {x: 34.005745, y: 81.14369}
+    - name: bat_sprit_sheet_1
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 192
+        width: 81
+        height: 105
+      alignment: 9
+      pivot: {x: 0.51773804, y: 0.3221126}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11.936783, y: 71.17818}
+        - {x: -13.936783, y: 70.17818}
+        - {x: -41.936783, y: 5.178177}
+        - {x: -41.936783, y: -33.821823}
+        - {x: -15.936783, y: -33.821823}
+        - {x: 22.063217, y: -23.821823}
+        - {x: 39.063217, y: -2.8218231}
+        - {x: 39.063217, y: 60.178177}
+        - {x: 37.063217, y: 71.17818}
+    - name: bat_sprit_sheet_2
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 192
+        width: 117
+        height: 108
+      alignment: 9
+      pivot: {x: 0.67192245, y: 0.37361625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11.614929, y: 67.649445}
+        - {x: -78.61493, y: 9.649445}
+        - {x: -78.61493, y: -40.350555}
+        - {x: 38.38507, y: -40.350555}
+        - {x: 38.38507, y: 56.649445}
+        - {x: 32.38507, y: 67.649445}
+    - name: bat_sprit_sheet_3
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 195
+        width: 81
+        height: 105
+      alignment: 9
+      pivot: {x: 0.50886893, y: 0.3289545}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 34.781616, y: 70.45978}
+        - {x: -6.218384, y: 70.45978}
+        - {x: -41.218384, y: 10.459778}
+        - {x: -41.218384, y: -33.540222}
+        - {x: -39.218384, y: -34.540222}
+        - {x: 21.781616, y: -34.540222}
+        - {x: 28.781616, y: -32.540222}
+        - {x: 39.781616, y: -4.540222}
+        - {x: 39.781616, y: 63.459778}
+    - name: bat_sprit_sheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 116
+        width: 127
+        height: 69
+      alignment: 9
+      pivot: {x: 0.48868674, y: 0.22930156}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 62.936783, y: 15.178192}
+        - {x: 64.93678, y: 26.178192}
+        - {x: 64.93678, y: 44.178192}
+        - {x: 51.936783, y: 53.178192}
+        - {x: 49.936783, y: 53.178192}
+        - {x: 46.936783, y: 52.178192}
+        - {x: 41.936783, y: 50.178192}
+        - {x: 12.936783, y: 53.178192}
+        - {x: -62.063217, y: 53.178192}
+        - {x: -62.063217, y: 4.178192}
+        - {x: -40.063217, y: -15.821808}
+        - {x: 19.936783, y: -15.821808}
+        - {x: 42.936783, y: -11.821808}
+        - {x: 49.936783, y: -6.821808}
+        - {x: 53.936783, y: -2.8218079}
+    - name: bat_sprit_sheet_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 62
+        width: 177
+        height: 120
+      alignment: 9
+      pivot: {x: 0.5144623, y: 0.4051522}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -45.059814, y: 71.38174}
+        - {x: -82.059814, y: 30.381737}
+        - {x: -90.059814, y: 13.381737}
+        - {x: -91.059814, y: 10.381737}
+        - {x: -91.059814, y: -6.6182632}
+        - {x: -33.059814, y: -48.618263}
+        - {x: 18.940186, y: -48.618263}
+        - {x: 85.940186, y: -16.618263}
+        - {x: 85.940186, y: 14.381737}
+        - {x: 82.940186, y: 18.381737}
+        - {x: 56.940186, y: 29.381737}
+        - {x: 24.940186, y: 71.38174}
+    - name: bat_sprit_sheet_6
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 71
+        width: 89
+        height: 119
+      alignment: 9
+      pivot: {x: 0.4825052, y: 0.4206196}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30.942963, y: 68.946266}
+        - {x: -42.942963, y: 21.946266}
+        - {x: -42.942963, y: -17.053734}
+        - {x: -16.942963, y: -50.053734}
+        - {x: 26.057037, y: -50.053734}
+        - {x: 46.057037, y: -16.053734}
+        - {x: 46.057037, y: 43.946266}
+        - {x: 32.057037, y: 68.946266}
+    - name: bat_sprit_sheet_7
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 67
+        width: 90
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5226196, y: 0.34800842}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31.035767, y: 81.49895}
+        - {x: -46.035767, y: 38.498947}
+        - {x: -46.035767, y: -24.501053}
+        - {x: -29.035767, y: -43.501053}
+        - {x: 19.964233, y: -43.501053}
+        - {x: 42.964233, y: -29.501053}
+        - {x: 42.964233, y: 36.498947}
+        - {x: 33.964233, y: 81.49895}
+    - name: bat_sprit_sheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 124
+        height: 103
+      alignment: 9
+      pivot: {x: 0.47682607, y: 0.29773444}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -19.126434, y: 72.33335}
+        - {x: -59.126434, y: 52.33335}
+        - {x: -59.126434, y: 14.333353}
+        - {x: -52.126434, y: 8.333353}
+        - {x: -41.126434, y: 4.333353}
+        - {x: -39.126434, y: 6.333353}
+        - {x: -42.126434, y: 2.333353}
+        - {x: -42.126434, y: 0.33335304}
+        - {x: -40.126434, y: -3.666647}
+        - {x: -45.126434, y: -15.666647}
+        - {x: -41.126434, y: -28.666647}
+        - {x: -33.126434, y: -30.666647}
+        - {x: -12.126434, y: -30.666647}
+        - {x: 12.873566, y: -20.666647}
+        - {x: 60.873566, y: 40.33335}
+        - {x: 60.873566, y: 72.33335}
+      - - {x: -9.126434, y: 64.33335}
+        - {x: -6.1264343, y: 65.33335}
+        - {x: -6.1264343, y: 68.33335}
+        - {x: -9.126434, y: 69.33335}
+        - {x: -11.126434, y: 67.33335}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
