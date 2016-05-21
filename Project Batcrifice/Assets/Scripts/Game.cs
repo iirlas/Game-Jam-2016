@@ -54,7 +54,7 @@ public class Game : MonoBehaviour {
             isDayTime = !isDayTime;
         }
 
-        //hunger -= 1.00f * Time.deltaTime;
+        hunger -= 1.00f * Time.deltaTime;
 
         if ( isDayTime )
         {
