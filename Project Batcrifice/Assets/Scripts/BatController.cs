@@ -283,6 +283,11 @@ public class BatController : MonoBehaviour {
                     print("SPEED");
                     break;
                 case 5:  //SWARM
+                    Game.getInstance().hunger = 100;
+                    Game.getInstance().health = 100;
+                    BatController.speed += (BatController.speed * 0.50f);
+                    Game.getInstance().isDayTime = false;
+                    Game.getInstance().dayTimer.reset();
                     print("HI SCOTT");
                     break;
             }

@@ -19,6 +19,8 @@ public class Game : MonoBehaviour {
     public bool isDayTime = false;
     public Timer dayTimer = new Timer();
 
+    public AudioSource audioSource;
+
     public static Game getInstance()
     {
         if ( instance == null )
@@ -28,6 +30,7 @@ public class Game : MonoBehaviour {
             {
                 GameObject singleton = new GameObject("Singleton.Game");
                 instance = singleton.AddComponent<Game>();
+                instance.audioSource = singleton.AddComponent<AudioSource>();
                 DontDestroyOnLoad(singleton);
             }
         }
