@@ -31,8 +31,9 @@ public class BatController : MonoBehaviour {
             return;
 
         //sprite.localEulerAngles = Vector3.forward * 90 * ;
-
-        Vector3 translation = new Vector3( Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0 );
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        Vector3 translation = new Vector3( h, v, 0 );
         translation *= (speed * Time.deltaTime);
 
 
