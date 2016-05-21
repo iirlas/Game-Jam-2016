@@ -40,6 +40,7 @@ public class Game : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         dayTimer.start();
+        Random.seed = System.DateTime.Now.Millisecond;
 	}
 	
 	// Update is called once per frame

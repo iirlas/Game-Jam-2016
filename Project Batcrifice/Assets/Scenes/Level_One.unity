@@ -1510,25 +1510,13 @@ Prefab:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 440134, guid: 5abac8beb20e1054f96bef355d0e5a0c, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 440134, guid: 5abac8beb20e1054f96bef355d0e5a0c, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 440134, guid: 5abac8beb20e1054f96bef355d0e5a0c, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 440134, guid: 5abac8beb20e1054f96bef355d0e5a0c, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 440134, guid: 5abac8beb20e1054f96bef355d0e5a0c, type: 2}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 21231368, guid: 5abac8beb20e1054f96bef355d0e5a0c, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5abac8beb20e1054f96bef355d0e5a0c, type: 2}
   m_IsPrefabParent: 0

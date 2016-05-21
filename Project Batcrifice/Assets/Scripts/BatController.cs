@@ -39,6 +39,7 @@ public class BatController : MonoBehaviour {
         if ( h != 0 )
         {
             side = (int)(h / Mathf.Abs(h));
+            transform.localScale = new Vector2(side, 1);
         }
 
         Vector3 translation = new Vector3( h, v, 0 );
@@ -69,8 +70,7 @@ public class BatController : MonoBehaviour {
             }
             else if ( translation != Vector3.zero )
             {
-                sprite.localEulerAngles = Vector3.forward * Vector3.Angle(Vector3.down, translation) *
-                                          ( translation.x > 0 ? 1 : -1 ) - Vector3.forward * 90;
+                sprite.localEulerAngles = Vector3.forward * Vector3.Angle(Vector3.down, translation) - Vector3.forward * 90;
 
             }
         }
@@ -189,11 +189,17 @@ public class BatController : MonoBehaviour {
     IEnumerator grab(GameObject item, Transform collision, Vector3 offset)
     {
         item.GetComponentInParent<Animator>().SetBool("Grabbed", true);
+        animator.speed = 4;
         while (Input.GetButton("SwoopAttack"))
         {
-            item.transform.position = transform.position - (collision.transform.localPosition + offset);
+            if (transform.position.y < item.transform.position.y + collision.localPosition.y) 
+            {
+                transform.Translate(Vector3.up);
+            }
+            item.transform.position = transform.position - (collision.localPosition + offset);
             yield return null;
         }
+        animator.speed = 1;
         item.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         item.GetComponentInParent<Animator>().SetBool("Grabbed", false);
         yield return null;
@@ -212,6 +218,7 @@ public class BatController : MonoBehaviour {
         }
     }
 
+    //--------------------------------------------------------------------------
     public void OnTriggerStay2D(Collider2D collision)
     {
         if ( collision.tag == "NPC" && state == State.ATTACK &&
