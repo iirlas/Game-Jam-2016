@@ -16,12 +16,14 @@ public class BatController : MonoBehaviour {
     public Transform sprite;
     public Animator animator;
     private State state;
+    private int side;
     //--------------------------------------------------------------------------
 	// Use this for initialization
 	void Start () {
         transform = GetComponent<Transform>();        
         state = State.FLY;
         animator.applyRootMotion = true;
+        side = 1;
 	}
 	
     //--------------------------------------------------------------------------
@@ -33,6 +35,12 @@ public class BatController : MonoBehaviour {
         //sprite.localEulerAngles = Vector3.forward * 90 * ;
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
+
+        if ( h != 0 )
+        {
+            side = (int)(h / Mathf.Abs(h));
+        }
+
         Vector3 translation = new Vector3( h, v, 0 );
         translation *= (speed * Time.deltaTime);
 
@@ -42,9 +50,8 @@ public class BatController : MonoBehaviour {
 
             transform.Translate(translation);
 
-            if (Input.GetButtonDown("SwoopAttack") && translation.x != 0 )
+            if (Input.GetButtonDown("SwoopAttack") )
             {
-                int side = (int)(translation.x / Mathf.Abs( translation.x ));
                 Game.getInstance().state = Game.State.STOP;
                 StartCoroutine(swoopAttack(180.0f, speed * side, 2.0f));
             }
@@ -53,10 +60,9 @@ public class BatController : MonoBehaviour {
                 Game.getInstance().state = Game.State.STOP;
                 StartCoroutine(attach(speed / 2.0f, 1.0f));
             }
-            else if (Input.GetButtonDown("StraightAttack") && translation.x != 0)
+            else if (Input.GetButtonDown("StraightAttack") )
             {
                 state = State.ATTACK;
-                int side = (int)(translation.x / Mathf.Abs(translation.x));
 
                 Game.getInstance().state = Game.State.STOP;
                 StartCoroutine(straightAttack(speed , 5.0f * side));
@@ -201,7 +207,11 @@ public class BatController : MonoBehaviour {
             Game.getInstance().state = Game.State.PLAY;
             state = State.ATTACH;
         }
-        else if ( collision.tag == "NPC" && state == State.ATTACK)
+    }
+
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if ( collision.tag == "NPC" && state == State.ATTACK)
         {
             StopAllCoroutines();
             collision.transform.localScale = Vector3.one;
@@ -220,5 +230,4 @@ public class BatController : MonoBehaviour {
             state = State.FLY;
         }
     }
-
 }
