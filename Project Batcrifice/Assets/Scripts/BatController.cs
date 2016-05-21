@@ -235,7 +235,7 @@ public class BatController : MonoBehaviour {
             state = State.FLY;
         }
         else if ( collision.tag == "Grabbable" &&
-                  collision.gameObject.GetComponentInParent<Animator>().GetBool("Attacked") == true )
+                  collision.gameObject.GetComponentInParent<Animator>().GetBool("Attacked") )
         {
             StopAllCoroutines();
             transform.eulerAngles = Vector3.zero;
