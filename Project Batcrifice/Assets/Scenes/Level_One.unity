@@ -3051,6 +3051,18 @@ Prefab:
       propertyPath: m_Size.x
       value: 1.225853
       objectReference: {fileID: 0}
+    - target: {fileID: 11415196, guid: 5abac8beb20e1054f96bef355d0e5a0c, type: 2}
+      propertyPath: batBiteSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1bdaed357e6909f4293ec94b5ca80522, type: 3}
+    - target: {fileID: 11415196, guid: 5abac8beb20e1054f96bef355d0e5a0c, type: 2}
+      propertyPath: flapSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd10708ead555884d84110562eae11fb, type: 3}
+    - target: {fileID: 11415196, guid: 5abac8beb20e1054f96bef355d0e5a0c, type: 2}
+      propertyPath: powerUpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d9748670c976b2149b8ffc96f8fdc99d, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5abac8beb20e1054f96bef355d0e5a0c, type: 2}
   m_IsPrefabParent: 0

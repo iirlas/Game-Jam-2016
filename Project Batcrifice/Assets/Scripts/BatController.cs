@@ -3,6 +3,10 @@ using System.Collections;
 
 public class BatController : MonoBehaviour {
 
+    public AudioClip powerUpSound;
+    public AudioClip batBiteSound;
+    public AudioClip flapSound;
+
     public enum State
     {
         FLY,
@@ -95,6 +99,7 @@ public class BatController : MonoBehaviour {
     //--------------------------------------------------------------------------
     IEnumerator straightAttack ( float speed, float distance )
     {
+        Game.getInstance().audioSource.PlayOneShot(batBiteSound);
         Vector3 targetPoint = transform.position;
         targetPoint += Vector3.right * distance * ( speed > 0 ? 1 : -1 );
         float targetDistance = 0;
@@ -120,6 +125,7 @@ public class BatController : MonoBehaviour {
     //--------------------------------------------------------------------------
     IEnumerator swoopAttack ( float angle, float speed, float pivotOffset )
     {
+        Game.getInstance().audioSource.PlayOneShot(batBiteSound);
         Vector3 pivotPoint = transform.position;
         pivotPoint = (speed > 0 ? pivotPoint + (Vector3.right * pivotOffset) :
                                   pivotPoint - (Vector3.right * pivotOffset));
@@ -232,6 +238,7 @@ public class BatController : MonoBehaviour {
 
         if (collision.tag == "PowerUp")
         {
+            Game.getInstance().audioSource.PlayOneShot(powerUpSound);
             int powerUp = Random.Range(0, 5) + 1;
  
             switch (powerUp)
